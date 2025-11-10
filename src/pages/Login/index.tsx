@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup"; // serve para integrar o yup com o react-hook-form
 import * as yup from "yup";
 
 import { Container, LoginContainer, Column, Spacing, Title } from "./styles";
@@ -9,10 +9,10 @@ import { defaultValues, IFormLogin } from "./types";
 
 const schema = yup
   .object({
-    email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
+    email: yup.string().email("Revise o seu E-mail!").required("Campo obrigatório"),
     password: yup
       .string()
-      .min(6, "No minimo 6 caracteres")
+      .min(3, "No minimo 3 caracteres")
       .required("Campo obrigatório"),
   })
   .required();
@@ -22,9 +22,9 @@ const Login = () => {
     control,
     formState: { errors, isValid },
   } = useForm<IFormLogin>({
-    resolver: yupResolver(schema),
-    mode: "onBlur",
-    defaultValues,
+    resolver: yupResolver(schema), // validação do formulário
+    mode: "onBlur", // quando o campo perde o foco
+    defaultValues, 
     reValidateMode: "onChange",
   });
 
