@@ -1,8 +1,17 @@
 import { ButtonContainer } from "./styles";
 import { IButtonProps } from "./types";
 
-const Button = ({ title, onClick }: IButtonProps) => {
-  return <ButtonContainer onClick={onClick}>{title}</ButtonContainer>;
+const Button = ({
+  title,
+  loading,
+  disabled,
+  ...rest
+}: IButtonProps) => {
+  return (
+    <ButtonContainer disabled={disabled || loading} {...rest}>
+      {loading ? "Carregando..." : title}
+    </ButtonContainer>
+  );
 };
 
 export default Button;
